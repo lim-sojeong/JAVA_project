@@ -69,8 +69,10 @@ public class Test_8{
 			msg="가위";
 		else if(1==a)
 			msg="바위";
-		else
+		else if(2==a)
 			msg="보";
+		else
+			msg="?";
 		
 		return msg;
 	}
