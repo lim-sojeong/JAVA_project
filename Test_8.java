@@ -53,6 +53,7 @@ public class Test_8{
 	int m_total;
 	int m_win;
 	int m_lost;
+	int m_error;
 	
 	public Test_8(){
 		m_com=new Computer();
@@ -60,6 +61,7 @@ public class Test_8{
 		m_total=0;
 		m_win=0;
 		m_lost=0;
+		m_error=0;
 	}
 	
 	String getValue(int a){
@@ -87,8 +89,11 @@ public class Test_8{
 			case 1:
 				msg="승";
 				break;
-			default:
+			case 2:
 				msg="패";
+				break;
+			default:
+				msg="오류";
 				break;
 		}
 		
@@ -100,7 +105,7 @@ public class Test_8{
 		int equal;
 		float rate;
 		
-		equal=m_total - (m_win + m_lost);
+		equal=m_total - (m_win + m_lost + m_error);
 		rate=(float)m_win/m_total;
 		
 		System.out.println("-------------------------");
@@ -108,41 +113,46 @@ public class Test_8{
 		System.out.println("이긴 횟수: " + m_win);
 		System.out.println("비긴 횟수: " + equal);
 		System.out.println("진 횟수: " + m_lost);
+		System.out.println("오류 발생 횟수: " + m_error);
 		System.out.println("승률: " + rate);
 		System.out.println("-------------------------");
 	}
 	
-	int checkGame(int com, int my){
+	int checkGame(int com, int p){
 		int a;
 		a=0;
 		
 		m_total++;
 		
-		if(com==my)
+		if(com==p)
 			a=0;
-		else if(0==com && 1==my){
+		else if(0==com && 1==p){
 			a=1;
 			m_win++;
 		}
-		else if(0==com && 2==my){
+		else if(0==com && 2==p){
 			a=2;
 			m_lost++;
 		}
-		else if(1==com && 0==my){
+		else if(1==com && 0==p){
 			a=2;
 			m_lost++;
 		}
-		else if(1==com && 2==my){
+		else if(1==com && 2==p){
 			a=1;
 			m_win++;
 		}
-		else if(2==com && 0==my){
+		else if(2==com && 0==p){
 			a=1;
 			m_win++;
 		}
-		else if(2==com && 1==my){
+		else if(2==com && 1==p){
 			a=2;
 			m_lost++;
+		}
+		else{
+			a=3;
+			m_error++;
 		}
 		
 		return a;
